@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DigitalDen · Ticket de reparación</title>
+<style>
+:root{--bg:#F4ECF8;--card:#fff;--tx:#2B2630;--mut:#6B6473;--bd:#E3D3EA;--navy:#17151A;--cy:#D9A6EA;--pk:#A84CC0;--vi:#7B2A91;--in:#F4ECF8;--ok:#13B981;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17151A;--card:#211C27;--tx:#F2ECF6;--mut:#C9B5D6;--bd:#3A2C45;--in:#1B1721}}
+:root[data-theme="dark"]{--bg:#17151A;--card:#211C27;--tx:#F2ECF6;--mut:#C9B5D6;--bd:#3A2C45;--in:#1B1721}
+*{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--navy);color:#fff;padding:22px 16px;text-align:center;border-bottom:3px solid var(--cy)}
+header h1{margin:0;font-size:28px;letter-spacing:3px}header h1 span{color:var(--pk)}
+header p{margin:4px 0 0;color:#C9B5D6;font-size:13px}
+main{max-width:980px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:820px){main{grid-template-columns:1fr 1fr}.full{grid-column:1/-1}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+h2{margin:0 0 10px;font-size:15px;color:var(--vi);text-transform:uppercase;letter-spacing:1px}
+label{display:block;font-size:12.5px;color:var(--mut);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px;border-radius:9px;border:1px solid var(--bd);background:var(--in);color:var(--tx);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--cy)}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.dmg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dmg label{display:flex;gap:8px;align-items:center;margin:0;padding:8px 10px;border:1px solid var(--bd);border-radius:9px;color:var(--tx);font-size:13.5px;cursor:pointer;background:var(--in)}
+.dmg label:has(input:checked){border-color:var(--pk);background:rgba(168,76,192,.14)}
+.dmg input{width:auto}
+.chk{display:flex;gap:9px;align-items:center;margin:8px 0;font-size:14px}.chk input{width:auto}
+button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;font:inherit;font-weight:700;background:var(--vi);color:#fff}
+button.alt{background:var(--pk)}button.ghost{background:transparent;color:var(--vi);border:1px solid var(--vi)}
+.sum{width:100%;border-collapse:collapse;font-size:14px}.sum td{padding:5px 0;border-bottom:1px dashed var(--bd)}.sum td:last-child{text-align:right;font-weight:600}
+.tot{background:var(--navy);color:#fff;border-radius:12px;padding:12px 14px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+.tot b{color:var(--cy);font-size:22px}
+.err{color:var(--pk);font-size:13px;min-height:18px;margin-top:6px}
+.ticket{background:var(--navy);color:#fff;border-radius:14px;padding:16px;border:1px solid var(--vi);display:none}
+.ticket .top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed #5B3470;padding-bottom:10px;margin-bottom:10px}
+.ticket .no{color:var(--cy);font-weight:800;font-size:18px;letter-spacing:1px}
+.ticket pre{margin:0;white-space:pre-wrap;font:12.5px/1.6 ui-monospace,Menlo,Consolas,monospace;color:#DCCBE6}
+.badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;background:var(--vi);color:#fff}
+.prog{display:flex;gap:4px;margin:10px 0}.prog i{flex:1;height:6px;border-radius:3px;background:#3A2C45}.prog i.on{background:var(--cy)}
+.t{border:1px solid var(--bd);border-radius:12px;padding:12px;margin-top:10px;background:var(--in)}
+.t .h{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.t select{width:auto;padding:6px 8px}
+.mut{color:var(--mut);font-size:13px}
+</style></head><body>
+<header><h1>DigitalDen <span>TALLER</span></h1><p>The Home Of Electrics · Ticket de reparación · Los Santos, San Andreas</p></header>
+<main>
+<section class="card"><h2>1 · Cliente y terminal</h2>
+ <label>Nombre del cliente</label><input id="name" placeholder="Ej: Marcos Valdés">
+ <div class="row"><div><label>Teléfono de contacto</label><input id="tel" placeholder="555-0000"></div>
+ <div><label>Modelo</label><select id="model"><option value="1">DEN One</option><option value="1.4">DEN Pulse</option><option value="2">DEN Phantom</option><option value="1.2">Otra marca</option></select></div></div>
+ <label>Técnico responsable</label><input id="tech" placeholder="Nombre del técnico">
+ <div class="chk"><input type="checkbox" id="ins"><label for="ins" style="margin:0;color:inherit;font-size:14px">Tiene Seguro DigitalDen (cubre pantalla y agua)</label></div>
+ <div class="chk"><input type="checkbox" id="card"><label for="card" style="margin:0;color:inherit;font-size:14px">Tarjeta DigitalDen (-5%)</label></div>
+ <div class="chk"><input type="checkbox" id="exp"><label for="exp" style="margin:0;color:inherit;font-size:14px">Reparación Express en 1 hora (+25%)</label></div>
+</section>
+<section class="card"><h2>2 · Daños detectados</h2>
+ <div class="dmg" id="dmg"></div>
+ <label>Notas del técnico</label><textarea id="notes" rows="3" placeholder="Estado exterior, contraseña, accesorios entregados..."></textarea>
+ <table class="sum" id="sum" style="margin-top:10px"></table>
+ <div class="tot"><span>Total estimado</span><b id="total">$0</b></div>
+ <div class="err" id="err"></div>
+ <button class="alt" id="make" type="button" style="width:100%">Crear ticket</button>
+</section>
+<section class="full"><div class="ticket" id="ticket">
+ <div class="top"><span class="no" id="tno"></span><span class="badge" id="tstat"></span></div>
+ <pre id="tbody"></pre>
+ <div class="row" style="margin-top:12px"><button id="copy" type="button">Copiar ticket</button></div>
+</div></section>
+<section class="card full"><h2>Tickets del taller</h2>
+ <div class="mut" id="empty">Todavía no hay tickets. Crea el primero arriba.</div><div id="list"></div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const DMG=[["Pantalla rota",250],["Batería",120],["Daño por agua",400],["Cámara",180],["Puerto de carga",100],["Software / virus",100],["Altavoz o micrófono",90],["Otro (presupuesto)",150]];
+const ST=["Recibido","Diagnóstico","En reparación","Listo","Entregado"];
+const money=n=>"$"+Math.round(n).toLocaleString("es-ES");
+let tickets=[];try{tickets=JSON.parse(localStorage.getItem("digitalden_tickets")||localStorage.getItem("volt_tickets")||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem("digitalden_tickets",JSON.stringify(tickets))}catch(e){}};
+$("dmg").innerHTML=DMG.map((d,i)=>`<label><input type="checkbox" data-i="${i}">${d[0]}</label>`).join("");
+function calc(){
+ const m=+$("model").value,rows=[];let tot=0;
+ document.querySelectorAll("#dmg input:checked").forEach(c=>{
+  const d=DMG[+c.dataset.i];let p=d[1]*m;
+  const cov=$("ins").checked&&(c.dataset.i==0||c.dataset.i==2);
+  rows.push([d[0]+(cov?" (cubierto por seguro)":""),cov?0:p]);if(!cov)tot+=p});
+ if($("exp").checked&&tot){const x=tot*0.25;rows.push(["Recargo Express",x]);tot+=x}
+ if($("card").checked&&tot){const x=tot*0.05;rows.push(["Tarjeta DigitalDen",-x]);tot-=x}
+ $("sum").innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]<0?"-":""}${money(Math.abs(r[1]))}</td></tr>`).join("");
+ $("total").textContent=money(tot);
+ return{rows,tot,dmg:[...document.querySelectorAll("#dmg input:checked")].map(c=>DMG[+c.dataset.i][0])};
+}
+function text(t){
+ return `CLIENTE: ${t.name}   TEL: ${t.tel||"-"}
+MODELO: ${t.model}   TÉCNICO: ${t.tech||"Personal DigitalDen"}
+FECHA: ${t.date}${t.exp?"   ⚡ EXPRESS":""}
+------------------------------
+DAÑOS: ${t.dmg.join(", ")}
+NOTAS: ${t.notes||"-"}
+------------------------------
+TOTAL: ${money(t.tot)}   ESTADO: ${t.status}
+Garantía de reparación: 7 días.`;
+}
+function show(t){
+ $("ticket").style.display="block";$("tno").textContent=t.no;$("tstat").textContent=t.status;$("tbody").textContent=text(t);
+ $("ticket").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function render(){
+ $("empty").style.display=tickets.length?"none":"block";
+ $("list").innerHTML=tickets.map((t,i)=>{
+  const s=ST.indexOf(t.status);
+  return `<div class="t"><div class="h"><b>${t.no} · ${t.name}</b>
+  <select data-i="${i}" class="st">${ST.map(x=>`<option${x===t.status?" selected":""}>${x}</option>`).join("")}</select></div>
+  <div class="prog">${ST.map((_,k)=>`<i class="${k<=s?"on":""}"></i>`).join("")}</div>
+  <div class="mut">${t.model} · ${t.dmg.join(", ")} · ${money(t.tot)}</div>
+  <div class="row" style="margin-top:8px"><button class="ghost v" data-i="${i}" type="button">Ver</button><button class="ghost d" data-i="${i}" type="button">Eliminar</button></div></div>`}).join("");
+ document.querySelectorAll(".st").forEach(e=>e.onchange=()=>{tickets[+e.dataset.i].status=e.value;save();render()});
+ document.querySelectorAll(".v").forEach(e=>e.onclick=()=>show(tickets[+e.dataset.i]));
+ document.querySelectorAll(".d").forEach(e=>e.onclick=()=>{tickets.splice(+e.dataset.i,1);save();render()});
+}
+$("make").onclick=()=>{
+ const c=calc();
+ const miss=!$("name").value.trim()?"Falta el nombre del cliente.":!c.dmg.length?"Marca al menos un daño.":"";
+ $("err").textContent=miss;if(miss)return;
+ const t={no:"RP-"+String(Math.floor(Math.random()*9000)+1000),name:$("name").value.trim(),tel:$("tel").value.trim(),
+  model:$("model").selectedOptions[0].text,tech:$("tech").value.trim(),notes:$("notes").value.trim(),dmg:c.dmg,tot:c.tot,
+  exp:$("exp").checked,status:"Recibido",date:new Date().toLocaleDateString("es-ES",{day:"2-digit",month:"long",year:"numeric"})};
+ tickets.unshift(t);save();render();show(t);
+};
+$("copy").onclick=async()=>{
+ const s=$("tno").textContent+"\n"+$("tbody").textContent;
+ try{await navigator.clipboard.writeText(s);$("err").textContent="Ticket copiado."}
+ catch(e){const r=document.createRange();r.selectNodeContents($("tbody"));const g=getSelection();g.removeAllRanges();g.addRange(r);$("err").textContent="Texto seleccionado: cópialo manualmente."}
+};
+document.querySelectorAll("select,input[type=checkbox]").forEach(e=>e.addEventListener("change",calc));
+calc();render();
+</script></body></html>
